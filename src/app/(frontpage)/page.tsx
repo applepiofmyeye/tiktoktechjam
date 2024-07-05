@@ -1,7 +1,7 @@
 import { Typography } from "@/components/typography";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import NavigationBar from "./_components/NavigationBar";
+import NavigationBar from "../../components/NavigationBar";
 
 export default function Home() {
   return (
