@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export default function BottomNavBar() {
   return (
-    <div className="absolute bottom-0">
-      <nav className="h-10 sticky bottom-0">
+    <div className="sticky bottom-0 bg-white border-t h-[50px]">
+      <nav className="h-10">
         <ul className="flex space-x-2">
           <li>
             <Link href="/" className={buttonVariants({ variant: "link" })}>

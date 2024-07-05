@@ -3,11 +3,13 @@ import React from "react";
 import Makeup1 from "/public/makeup1.jpeg";
 import Makeup2 from "/public/makeup2.jpeg";
 import Makeup3 from "/public/makeup3.jpeg";
+import ShoppingListPageCard from "./ShoppingListPageCard";
 
 export default function ShoppingListPage() {
   const shoppingLists = [
     {
       title: "makeup products i'm eyeing",
+      thumbnail: Makeup1,
       images: [
         { source: "/public/makeup1.jpeg" },
         { source: "/public/makeup2.jpeg" },
@@ -16,10 +18,10 @@ export default function ShoppingListPage() {
         { source: "/public/makeup5.jpeg" },
         { source: "/public/makeup6.jpeg" },
       ],
-      setting: [],
     },
     {
       title: "lipsticks",
+      thumbnail: Makeup2,
       images: [
         { source: "/public/makeup5.jpeg" },
         { source: "/public/makeup6.jpeg" },
@@ -29,6 +31,7 @@ export default function ShoppingListPage() {
     },
     {
       title: "blushes!!",
+      thumbnail: Makeup3,
       images: [
         { source: "/public/makeup1.jpeg" },
         { source: "/public/makeup2.jpeg" },
@@ -38,27 +41,13 @@ export default function ShoppingListPage() {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-2 p-4">
-      <div className="col-span-1">
-        <Image
-          src={Makeup1}
-          alt="blush product"
-          className="shadow-md rounded-xl size-40 object-cover"
-        />
-
-        <Image
-          src={Makeup2}
-          alt="blush product"
-          className="shadow-md rounded-xl size-40 object-cover"
-        />
-      </div>
-      <div className="grid-cols-2">
-        <Image
-          src={Makeup3}
-          alt="blush product"
-          className="size-40 rounded-xl shadow-md object-cover"
-        />
-      </div>
+    <div className="grid grid-cols-2 gap-2 gap-y-4 p-4">
+      {shoppingLists.map((list, i) => (
+        <ShoppingListPageCard key={i} list={list} />
+      ))}
+      {shoppingLists.map((list, i) => (
+        <ShoppingListPageCard key={i} list={list} />
+      ))}
     </div>
   );
 }
