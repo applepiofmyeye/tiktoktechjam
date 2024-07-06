@@ -24,7 +24,7 @@ export default function ProfileInfo() {
     },
   ];
   return (
-    <div className="items-center flex flex-col space-y-6 border-b pb-6">
+    <div className="items-center flex flex-col space-y-6  pb-6">
       <div className="space-y-2">
         <div className="size-24">
           <Image

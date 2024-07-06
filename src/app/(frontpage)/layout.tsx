@@ -4,5 +4,5 @@ export default function PhoneLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="w-[46vh] h-[80vh] border-r">{children}</div>;
+  return <div className="w-[46vh] h-full border-r">{children}</div>;
 }

@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ProfileTab() {
   return (
-    <div className="h-7 px-5 py-2">
+    <div className="px-5 py-2 border-b">
       <nav>
         <ul className="flex justify-between">
           <li>

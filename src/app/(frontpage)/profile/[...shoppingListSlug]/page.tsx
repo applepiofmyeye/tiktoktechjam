@@ -30,6 +30,7 @@ export default async function ShoppingListSlugPage({ params }: ParamsProps) {
                 name={product.name}
                 price={product.price}
                 imageUrl={product.imageUrl}
+                id={product.id}
               />
             ))}
           </Masonry>

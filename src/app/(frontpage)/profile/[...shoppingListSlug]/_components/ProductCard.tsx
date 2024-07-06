@@ -1,18 +1,22 @@
+"use client";
 import { Typography } from "@/components/typography";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function ProductCard({
   name,
   price,
   imageUrl,
+  id,
 }: {
   name: string;
   price: string;
   imageUrl: string;
+  id: string;
 }) {
   return (
-    <div className="space-y-2">
+    <Link className="space-y-2" href={`/videos/${id}`}>
       <div className="w-full">
         <Image
           src={imageUrl}
@@ -30,6 +34,6 @@ export default function ProductCard({
           S${price}
         </Typography>
       </div>
-    </div>
+    </Link>
   );
 }
