@@ -4,5 +4,10 @@ export default function PhoneLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="w-[46vh] h-full border-r">{children}</div>;
+  return (
+    <div className="w-[46vh] h-full border-r">
+      {/* Hard code user info */}
+      {children}
+    </div>
+  );
 }

@@ -1,9 +1,10 @@
-import Image from "next/image";
+"use client";
 import React from "react";
 
 import ShoppingListPageCard from "./ShoppingListPageCard";
 import { getShoppingLists } from "../_actions/getItems";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { usePathname, useRouter } from "next/navigation";
 
 export function titleToSlug(title: string): string {
   // Convert to lowercase
@@ -18,8 +19,21 @@ export function titleToSlug(title: string): string {
   return slug;
 }
 
-export default async function ShoppingListPage() {
-  const lists = await getShoppingLists("joeylleyi");
+export default function ShoppingListPage({
+  lists,
+}: {
+  lists:
+    | {
+        id: string;
+        title: string;
+        thumbnail: string;
+        userId: string;
+        slug: string | null;
+      }[]
+    | undefined;
+}) {
+  const router = useRouter();
+  const pathName = usePathname();
 
   return (
     <ScrollArea className="p-4">
@@ -28,7 +42,9 @@ export default async function ShoppingListPage() {
           <ShoppingListPageCard
             key={i}
             list={{ title: list.title, thumbnail: list.thumbnail }}
-            slug={titleToSlug(list.title)}
+            onClick={() =>
+              router.push(`${pathName}/${titleToSlug(list.title)}`)
+            }
           />
         ))}
       </div>
