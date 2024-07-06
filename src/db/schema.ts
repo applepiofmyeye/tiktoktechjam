@@ -1,3 +1,4 @@
+
 import { relations } from "drizzle-orm";
 import { pgTable, primaryKey, text, uuid } from "drizzle-orm/pg-core";
 
@@ -10,7 +11,8 @@ export const shoppingLists = pgTable("shopping_lists", {
     id: uuid("id").defaultRandom().primaryKey().notNull(),
     title: text("title").notNull(),
     thumbnail: text("thumbnail").notNull(),
-    userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" })
+    userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+    slug: text("slug")
 });
 
 export const products = pgTable("products", {
