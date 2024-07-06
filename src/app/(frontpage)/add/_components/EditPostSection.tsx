@@ -15,11 +15,11 @@ export default function EditPostSection() {
           />
           <div className="w-[20%] h-auto">
             <Image
-              src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2022/09/vong-deo-tay-van-cleef-arpels-sweet-alhambra-bracelet-vcarf68800-mau-vang-gold-6322d37e43832-15092022142550.jpg"
+              src="https://m.media-amazon.com/images/I/61cVINNFA5L._AC_UF1000,1000_QL80_.jpg"
               alt="bracelet placeholder"
-              className="rounded-lg object-cover"
-              width={100}
-              height={150}
+              className="rounded-lg object-cover size-24"
+              width={50}
+              height={50}
             />
           </div>
         </div>
