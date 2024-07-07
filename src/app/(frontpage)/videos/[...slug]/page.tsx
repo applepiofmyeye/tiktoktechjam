@@ -4,6 +4,7 @@ import Image from "next/image";
 import ActivityPanel from "./_components/ActivityPanel";
 import { getShoppingLists } from "../../profile/_actions/getItems";
 import BottomNavBar from "@/components/BottomNavBar";
+import { getUsernameCookies } from "../../home/_actions/getUsernameCookies";
 
 type ParamsProps = {
   params: {
@@ -17,7 +18,10 @@ export default async function VideoPage({ params }: ParamsProps) {
 
   const product = await getProduct(slug);
   const image = product?.imageUrl;
-  const lists = await getShoppingLists("joeylleyi");
+  const username = await getUsernameCookies();
+
+  const lists = username ? await getShoppingLists(username) : [];
+  console.log(JSON.stringify(lists));
 
   return (
     <div className="w-auto h-[100vh] bg-gray-950 relative">
@@ -31,11 +35,14 @@ export default async function VideoPage({ params }: ParamsProps) {
               width={400}
               className="object-cover w-full"
             />
-            <ActivityPanel product={product} lists={lists} />
+            <ActivityPanel
+              product={product}
+              lists={lists}
+              username={username}
+            />
           </>
         )}
       </div>
-      <BottomNavBar />
     </div>
   );
 }

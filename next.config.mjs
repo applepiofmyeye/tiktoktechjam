@@ -41,6 +41,11 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: "www.pixibeauty.com",
                 port:  '',
+            },
+            {
+                protocol: 'https',
+                hostname: "picsum.photos",
+                port:  '',
             }
         ]
 

@@ -6,16 +6,19 @@ import {
   Bookmark,
   Heart,
   MessageCircle,
+  Plus,
   Share2,
   ShoppingBag,
 } from "lucide-react";
 import { useState } from "react";
 import ProductInfoSheet from "./ProductInfoSheet";
 import ShoppingListOptionsCard from "./ShoppingListOptionsCard";
+import AddNewList from "./AddNewList";
 
 export default function ActivityPanel({
   product,
   lists,
+  username,
 }: {
   product: {
     name: string;
@@ -32,19 +35,19 @@ export default function ActivityPanel({
         slug: string | null;
       }[]
     | undefined;
+  username: string | undefined;
 }) {
   const [step, setStep] = useState(1);
   const [open, setIsOpen] = useState(false);
   const onClickStep1 = () => setStep(2);
-  const onClickStep2 = () => setStep(3);
 
   return (
     <div className="absolute right-2 text-white">
       <div className="flex flex-col items-center z-10 space-y-4">
-        <Heart className="size-8 stroke-1" />
-        <MessageCircle className="size-8 stroke-1" />
+        <Heart fill="gray" className="size-8 stroke-2" />
+        <MessageCircle fill="gray" className="size-8 stroke-2" />
 
-        <Bookmark className="size-8 stroke-1 text-white" />
+        <Bookmark fill="gray" className="size-8 stroke-2 text-white" />
 
         <Sheet
           open={open}
@@ -57,9 +60,10 @@ export default function ActivityPanel({
         >
           <SheetTrigger asChild>
             <Button variant={"link"} onClick={() => setIsOpen(true)}>
-              <div className="rounded-full flex border-4 border-gray-200 size-12 items-center justify-center">
-                <ShoppingBag className="text-white size-8 stroke-1" />
-              </div>
+              <ShoppingBag
+                fill="green"
+                className="text-white size-8 stroke-2"
+              />
             </Button>
           </SheetTrigger>
           <SheetContent side="bottom" className="w-[46vh]">
@@ -70,7 +74,7 @@ export default function ActivityPanel({
                 <Typography variant={"body-lg"} weight={"semibold"}>
                   Add to shopping list
                 </Typography>
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-2 justify-center">
                   {lists &&
                     lists.map((list, idx) => (
                       <ShoppingListOptionsCard
@@ -79,12 +83,23 @@ export default function ActivityPanel({
                         list={list}
                       />
                     ))}
+                  {lists?.length == 0 && !username && (
+                    <Typography className="text-gray-600" variant={"body-sm"}>
+                      {
+                        "Please enter a username in the 'home' page before you continue."
+                      }{" "}
+                    </Typography>
+                  )}
+
+                  {username && (
+                    <AddNewList username={username} productId={product.id} />
+                  )}
                 </div>
               </div>
             )}
           </SheetContent>
         </Sheet>
-        <Share2 className="size-8 stroke-1 " />
+        <Share2 fill="gray" className="size-8 stroke-2 " />
       </div>
     </div>
   );

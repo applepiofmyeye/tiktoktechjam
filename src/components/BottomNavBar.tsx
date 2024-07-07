@@ -6,7 +6,7 @@ export default function BottomNavBar() {
   return (
     <div className="sticky bottom-0 bg-white border-t h-[50px] ">
       <nav className="h-10">
-        <ul className="flex space-x-2">
+        <ul className="flex justify-between px-2">
           <li>
             <Link href="/home" className={buttonVariants({ variant: "link" })}>
               home

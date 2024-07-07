@@ -5,6 +5,7 @@ import ShoppingListPageCard from "./ShoppingListPageCard";
 import { getShoppingLists } from "../_actions/getItems";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { usePathname, useRouter } from "next/navigation";
+import { Typography } from "@/components/typography";
 
 export function titleToSlug(title: string): string {
   // Convert to lowercase
@@ -37,6 +38,13 @@ export default function ShoppingListPage({
 
   return (
     <ScrollArea className="p-4">
+      {lists?.length == 0 && (
+        <Typography>
+          {
+            'Your Shopping Lists are empty. Go to "home" to scroll and add some items to your Shopping Lists!'
+          }{" "}
+        </Typography>
+      )}
       <div className="grid grid-cols-2 gap-2 gap-y-4 min-h-[55vh] justify-items-center">
         {lists?.map((list, i) => (
           <ShoppingListPageCard

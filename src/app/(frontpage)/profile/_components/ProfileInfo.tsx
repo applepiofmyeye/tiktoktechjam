@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import DefaultPfp from "/public/default-pfp.png";
 import Image from "next/image";
@@ -5,7 +6,11 @@ import { Typography } from "@/components/typography";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, UserRoundPlus } from "lucide-react";
 
-export default function ProfileInfo() {
+export default function ProfileInfo({
+  initialUsername,
+}: {
+  initialUsername: string | undefined;
+}) {
   const profileStatistics = [
     {
       key: 0,
@@ -23,9 +28,10 @@ export default function ProfileInfo() {
       number: "2.1K",
     },
   ];
+
   return (
     <div className="items-center flex flex-col space-y-6  pb-6">
-      <div className="space-y-2">
+      <div className="space-y-2 flex flex-col items-center">
         <div className="size-24">
           <Image
             src={DefaultPfp}
@@ -33,9 +39,15 @@ export default function ProfileInfo() {
             className=" object-cover"
           />
         </div>
-        <Typography className="text-center" weight={"semibold"}>
-          @j.oeyylee
-        </Typography>
+        {initialUsername ? (
+          <Typography className="text-center" weight={"semibold"}>
+            @{initialUsername}
+          </Typography>
+        ) : (
+          <Typography className="text-center">
+            {'go to "home" to set a username to access :-)'}
+          </Typography>
+        )}
       </div>
       <div className="flex space-x-4">
         {profileStatistics.map((stats) => {

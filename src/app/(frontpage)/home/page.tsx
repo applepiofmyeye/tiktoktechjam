@@ -1,12 +1,13 @@
-"use client";
-
-import BottomNavBar from "@/components/BottomNavBar";
 import { Typography } from "@/components/typography";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-export default function HomePage() {
+import { cn } from "@/lib/utils";
+import UsernameForm from "./_components/UsernameForm";
+import { getUsernameCookies } from "./_actions/getUsernameCookies";
+
+export default async function HomePage() {
   const pages = [
     {
       slug: "this-or-that",
@@ -33,23 +34,29 @@ export default function HomePage() {
         "For Tiktok: Some products are not yet available on Tiktok shop, hence when a similar item is available, there could be a recommendation to let them know that there is something similar on the shop which they might like, and encourage them to get it on tiktok shop.",
     },
   ];
-  const router = useRouter();
+  const initialUsername = await getUsernameCookies();
+
   return (
-    <div className="gap-y-4 flex flex-col items-center px-4 py-6">
-      <Typography variant={"title-md"} className="text-center">
-        For You Page Cards
-      </Typography>
-      <Typography variant={"body-sm"} className="text-gray-500">
-        Tiktok is currently using data to monitor activity and push different
-        content of Tiktok Shop to different users based on their unique
-        preferences. For example, someone who is inclined to engage with `Flash
-        deals` would be pushed to see those more often while others may not.
-        <br />
-        <br />
-        In the same vein, my idea aims to collect data on what products users
-        are drawn to, and push those products to them when they enter the app.
-      </Typography>
-      <div className="gap-y-8 flex flex-col">
+    <div className="gap-y-4 flex flex-col items-center px-4 py-6 space-y-8">
+      <UsernameForm initialUsername={initialUsername} />
+      <div className="space-y-2">
+        <Typography variant={"title-md"} className="text-center">
+          For You Page Cards
+        </Typography>
+        <Typography variant={"body-sm"} className="text-gray-500">
+          Tiktok is currently using data to monitor activity and push different
+          content of Tiktok Shop to different users based on their unique
+          preferences. For example, someone who is inclined to engage with
+          `Flash deals` would be pushed to see those more often while others may
+          not.
+          <br />
+          <br />
+          In the same vein, my idea aims to collect data on what products users
+          are drawn to, and push those products to them when they enter the app.
+        </Typography>
+      </div>
+
+      <div className="space-y-8 ">
         {pages.map((page, idx) => (
           <div key={idx} className="flex flex-col items-center space-y-2">
             <Typography variant={"title-md"} className="text-center">
@@ -58,13 +65,13 @@ export default function HomePage() {
             <Typography variant={"body-sm"} className="text-gray-500">
               {page.description}
             </Typography>
-            <Button
+            <Link
               key={idx}
-              className="w-[80%]"
-              onClick={() => router.push(`/home/${page.slug}`)}
+              className={cn("w-[80%]", buttonVariants({ variant: "default" }))}
+              href={`/home/${page.slug}`}
             >
               Try now!
-            </Button>
+            </Link>
           </div>
         ))}
       </div>
