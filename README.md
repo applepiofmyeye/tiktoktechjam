@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Hi my name is Joey. This is my submission for the TikTok Techjam 2024.
 
 ## Getting Started
 
@@ -13,6 +13,30 @@ pnpm dev
 # or
 bun dev
 ```
+
+The left hand side of the screen has been designed to simulate a phone. You may use the buttons below to navigate around the website, and there are 3 demo flows to follow
+
+Flow 1: This or That create
+
+1. In the shoppingListSlug page, add a feature to add a this or that and ask them to add the 2 products, title and username of the person they want to send to.
+
+adding a product to shopping list
+
+1. view a product (home page),
+2. then add to shopping list using the shopping bag icon.
+3. then head to profile and you should see the item you want there.
+
+Flow 2: adding a product to a video (from creators pov)
+
+1. go to add page
+2. click link Item
+3. search for the item.
+4. for future implementation: when there is no item in the list but it is mentioned in the video, it can be added to the database, but with a flag to signal it is not an actual product.
+5. exit
+6. delete item
+7. also for future implementation: link more than one item.
+
+Flow 3:
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
