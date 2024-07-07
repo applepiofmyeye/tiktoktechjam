@@ -14,6 +14,7 @@ export default function ProductCard({
     setOpen(false);
     setIsSelected(true);
   };
+
   return (
     <div>
       <div className="space-y-2 cursor-pointer" onClick={onClick}>

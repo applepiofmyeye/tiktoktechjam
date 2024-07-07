@@ -26,6 +26,21 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: "cdn.vuahanghieu.com",
                 port:  '',
+            },
+            {
+                protocol: 'https',
+                hostname: "images.rawpixel.com",
+                port:  '',
+            },
+            {
+                protocol: 'https',
+                hostname: "product.hstatic.net",
+                port:  '',
+            },
+            {
+                protocol: 'https',
+                hostname: "www.pixibeauty.com",
+                port:  '',
             }
         ]
 

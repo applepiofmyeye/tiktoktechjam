@@ -1,21 +1,21 @@
 import React from "react";
-import { buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import Link from "next/link";
 
 export default function BottomNavBar() {
   return (
-    <div className="sticky bottom-0 bg-white border-t h-[50px]">
+    <div className="sticky bottom-0 bg-white border-t h-[50px] ">
       <nav className="h-10">
         <ul className="flex space-x-2">
           <li>
-            <Link href="/" className={buttonVariants({ variant: "link" })}>
+            <Link href="/home" className={buttonVariants({ variant: "link" })}>
               home
             </Link>
           </li>
           <li>
-            <Link href="/shop" className={buttonVariants({ variant: "link" })}>
+            <Button variant={"link"} disabled>
               shop
-            </Link>
+            </Button>
           </li>
           <li>
             <Link href="/add" className={buttonVariants({ variant: "link" })}>
@@ -23,12 +23,9 @@ export default function BottomNavBar() {
             </Link>
           </li>
           <li>
-            <Link
-              href="/activity"
-              className={buttonVariants({ variant: "link" })}
-            >
+            <Button variant={"link"} disabled>
               activity
-            </Link>
+            </Button>
           </li>
           <li>
             <Link

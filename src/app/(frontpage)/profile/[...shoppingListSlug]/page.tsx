@@ -21,7 +21,7 @@ export default async function ShoppingListSlugPage({ params }: ParamsProps) {
   return (
     <div className="flex flex-col p-4 items-center space-y-6">
       {title && <ShoppingListBanner title={title} />}
-      <div className="w-full">
+      <div className="w-full flex justify-center">
         {products && (
           <Masonry columns={2} spacing={2} sequential>
             {products.map((product, idx) => (

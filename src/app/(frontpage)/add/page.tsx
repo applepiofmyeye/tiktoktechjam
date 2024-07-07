@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import EditPostSection from "./_components/EditPostSection";
 import LocationSection from "./_components/LocationSection";
 import OtherSection from "./_components/OtherSection";
@@ -8,8 +8,11 @@ import AddProductSection from "./_components/AddProductSection";
 import BottomNavBar from "@/components/BottomNavBar";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { getAllProducts } from "../home/_actions/getAllProducts";
+import type { Option } from "@/components/ui/autocomplete";
+export default async function Page() {
+  const allProducts = await getAllProducts();
 
-export default function Page() {
   return (
     <div className="h-[100vh] space-y-6">
       {/* description photo thumbnail
@@ -21,11 +24,13 @@ export default function Page() {
             share to logos
             */}
       <EditPostSection />
-      <AddProductSection />
+      <Suspense>
+        {allProducts && <AddProductSection products={allProducts} />}
+      </Suspense>
       <LocationSection />
       <OtherSection />
 
-      <div className="h-[25vh]" />
+      <div className="h-[20vh]" />
       <div className="flex px-4 justify-between">
         <Button variant={"secondary"} className="w-[48%] gap-1">
           <GalleryVerticalEnd className="size-4" />

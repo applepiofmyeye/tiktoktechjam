@@ -8,7 +8,7 @@ export default function OtherSection() {
       <div className="flex justify-between px-4">
         <div className="flex gap-2 items-center">
           <Earth className="size-4" />
-          <Typography variant={"body-lg"} weight={"semibold"}>
+          <Typography variant={"body-md"} weight={"semibold"}>
             {" "}
             Followers can view this post
           </Typography>
@@ -18,7 +18,7 @@ export default function OtherSection() {
       <div className="flex justify-between px-4">
         <div className="flex gap-2 items-center">
           <Ellipsis className="size-4" />
-          <Typography variant={"body-lg"} weight={"semibold"}>
+          <Typography variant={"body-md"} weight={"semibold"}>
             {" "}
             More options
           </Typography>
@@ -28,7 +28,7 @@ export default function OtherSection() {
       <div className="flex justify-between px-4">
         <div className="flex gap-2 items-center">
           <Forward className="size-4" />
-          <Typography variant={"body-lg"} weight={"semibold"}>
+          <Typography variant={"body-md"} weight={"semibold"}>
             {" "}
             Share to
           </Typography>

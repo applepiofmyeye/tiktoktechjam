@@ -1,24 +1,29 @@
 "use client";
 
 import { Typography } from "@/components/typography";
+import { AutoComplete, type Option } from "@/components/ui/autocomplete";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link } from "lucide-react";
-import React, { useState } from "react";
-import { AutoComplete, type Option } from "@/components/ui/autocomplete";
-import ShoppingListOptionsCard from "../../videos/[slug]/_components/ShoppingListOptionsCard";
+import { useState } from "react";
 import ProductCard from "./ProductCard";
 import ProductListItem from "./ProductListItem";
 
-export default function AddProductSection() {
+export default function AddProductSection({
+  products,
+}: {
+  products: {
+    id: string;
+    name: string;
+    price: string;
+    imageUrl: string;
+  }[];
+}) {
   const [value, setValue] = useState<Option>();
-  const PRODUCTS = [
-    {
-      value: "pixi blush",
-      label: "Pixi Blush",
-    },
-  ];
+  const PRODUCTS = products?.map((product) => ({
+    value: product.name.toLowerCase(),
+    label: product.name,
+  }));
   const [open, setOpen] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
 
@@ -30,7 +35,7 @@ export default function AddProductSection() {
           <div className="flex justify-between px-4 cursor-pointer">
             <div className="flex gap-2 items-center">
               <Link className="size-4" />
-              <Typography variant={"body-lg"} weight={"semibold"}>
+              <Typography variant={"body-md"} weight={"semibold"}>
                 {" "}
                 Link products
               </Typography>
@@ -56,7 +61,9 @@ export default function AddProductSection() {
               {value?.label == "Pixi Blush" ? (
                 <ProductCard setOpen={setOpen} setIsSelected={setIsSelected} />
               ) : (
-                <Typography>No such product found.</Typography>
+                <Typography>
+                  No such product found. Try typing `Pixi Blush`
+                </Typography>
               )}
             </div>
           </div>

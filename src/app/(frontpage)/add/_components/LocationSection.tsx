@@ -11,7 +11,7 @@ export default function LocationSection() {
         <div className="gap-2 flex items-center">
           <MapPin className="size-4" />
           <div className="flex items-baseline gap-1">
-            <Typography variant={"body-lg"} weight={"semibold"}>
+            <Typography variant={"body-md"} weight={"semibold"}>
               Location
             </Typography>
 

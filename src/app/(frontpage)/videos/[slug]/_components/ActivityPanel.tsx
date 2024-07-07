@@ -2,7 +2,13 @@
 import { Typography } from "@/components/typography";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
+import {
+  Bookmark,
+  Heart,
+  MessageCircle,
+  Share2,
+  ShoppingBag,
+} from "lucide-react";
 import { useState } from "react";
 import ProductInfoSheet from "./ProductInfoSheet";
 import ShoppingListOptionsCard from "./ShoppingListOptionsCard";
@@ -37,6 +43,9 @@ export default function ActivityPanel({
       <div className="flex flex-col items-center z-10 space-y-4">
         <Heart className="size-8 stroke-1" />
         <MessageCircle className="size-8 stroke-1" />
+
+        <Bookmark className="size-8 stroke-1 text-white" />
+
         <Sheet
           open={open}
           onOpenChange={(open: boolean) => {
@@ -48,8 +57,8 @@ export default function ActivityPanel({
         >
           <SheetTrigger asChild>
             <Button variant={"link"} onClick={() => setIsOpen(true)}>
-              <div className="rounded-full flex border-4 border-gray-200 size-10 items-center justify-center">
-                <Bookmark className="size-8 stroke-1 text-white" />
+              <div className="rounded-full flex border-4 border-gray-200 size-12 items-center justify-center">
+                <ShoppingBag className="text-white size-8 stroke-1" />
               </div>
             </Button>
           </SheetTrigger>
