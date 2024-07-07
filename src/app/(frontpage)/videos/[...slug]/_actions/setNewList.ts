@@ -1,16 +1,15 @@
 
 "use server"
-import { titleToSlug } from "@/app/(frontpage)/profile/_components/ShoppingListPage";
 import { db } from "@/db";
 import { shoppingLists } from "@/db/schema";
 
-export async function setNewList (title: string, thumbnail: string, userId: string) {
+export async function setNewList (title: string, thumbnail: string, userId: string, slug:string) {
     try {
         const list = await db.insert(shoppingLists).values({
             title: title,
             thumbnail: thumbnail,
             userId: userId,
-            slug: titleToSlug(title)
+            slug: slug
         }).returning({
             id: shoppingLists.id
         })

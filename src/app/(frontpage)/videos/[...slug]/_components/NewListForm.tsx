@@ -20,6 +20,7 @@ import { Loader2 } from "lucide-react";
 import { setNewList } from "../_actions/setNewList";
 import { getIdCookies } from "@/app/(frontpage)/home/_actions/getUsernameCookies";
 import { toast } from "@/components/ui/use-toast";
+import { titleToSlug } from "@/app/(frontpage)/profile/_components/ShoppingListPage";
 const NewListFormSchema = z.object({
   title: z
     .string()
@@ -57,7 +58,12 @@ export default function NewListForm({
   function onSubmit(data: z.infer<typeof NewListFormSchema>) {
     startTransition(async () => {
       const userId = await getIdCookies();
-      const listId = await setNewList(data.title, imageUrl, userId!);
+      const listId = await setNewList(
+        data.title,
+        imageUrl,
+        userId!,
+        titleToSlug(data.title)
+      );
       setLists([
         ...lists,
         {

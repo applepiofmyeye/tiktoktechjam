@@ -5,6 +5,7 @@ import ProductCard from "./_components/ProductCard";
 import Masonry from "@mui/lab/Masonry";
 import { Button } from "@/components/ui/button";
 import ShoppingListBanner from "./_components/ShoppingListBanner";
+import { getUsernameCookies } from "../../home/_actions/getUsernameCookies";
 
 type ParamsProps = {
   params: {
@@ -15,11 +16,12 @@ type ParamsProps = {
 export default async function ShoppingListSlugPage({ params }: ParamsProps) {
   const slug = params.shoppingListSlug;
   const title = await getListName(slug);
-  const products = await getProducts(title, "joeylleyi");
+  const username = await getUsernameCookies();
+  const products = await getProducts(title, username!);
   console.log(products);
 
   return (
-    <div className="flex flex-col p-4 items-center space-y-6">
+    <div className="flex flex-col p-4 items-center space-y-6 h-[100vh]">
       {title && <ShoppingListBanner title={title} />}
       <div className="w-full flex justify-center">
         {products && (

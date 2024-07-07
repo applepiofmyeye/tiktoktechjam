@@ -74,7 +74,10 @@ export default function ActivityPanel({
                 <Typography variant={"body-lg"} weight={"semibold"}>
                   Add to shopping list
                 </Typography>
-                <div className="grid grid-cols-2 justify-center">
+                <div className="grid grid-cols-2 justify-center gap-4">
+                  {username && (
+                    <AddNewList username={username} product={product} />
+                  )}
                   {lists &&
                     lists.map((list, idx) => (
                       <ShoppingListOptionsCard
@@ -89,10 +92,6 @@ export default function ActivityPanel({
                         "Please enter a username in the 'home' page before you continue."
                       }{" "}
                     </Typography>
-                  )}
-
-                  {username && (
-                    <AddNewList username={username} product={product} />
                   )}
                 </div>
               </div>

@@ -21,13 +21,6 @@ export default function AddNewList({
     id: string;
   };
 }) {
-  const [isPending, startTransition] = useTransition();
-  const [title, setTitle] = useState("");
-  const onClick = () => {
-    startTransition(async () => {
-      await setNewList(title, product.imageUrl, username);
-    });
-  };
   const [lists, setLists] = useState<
     {
       title: string;
@@ -40,8 +33,8 @@ export default function AddNewList({
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <div className={isPending ? "space-y-2" : "space-y-2 cursor-pointer"}>
-            <div className="shadow-sm rounded-lg size-40 border-2 items-center flex justify-center">
+          <div className={"space-y-2 cursor-pointer"}>
+            <div className="shadow-sm rounded-lg h-40 border-2 items-center flex justify-center">
               <Plus className="size-10" />
             </div>
             {
