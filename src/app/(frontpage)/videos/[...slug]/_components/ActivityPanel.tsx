@@ -92,7 +92,7 @@ export default function ActivityPanel({
                   )}
 
                   {username && (
-                    <AddNewList username={username} productId={product.id} />
+                    <AddNewList username={username} product={product} />
                   )}
                 </div>
               </div>

@@ -29,6 +29,7 @@ const NewListFormSchema = z.object({
 export default function NewListForm({
   setLists,
   lists,
+  imageUrl,
 }: {
   setLists: React.Dispatch<
     React.SetStateAction<
@@ -44,6 +45,7 @@ export default function NewListForm({
     thumbnail: string;
     id: string;
   }[];
+  imageUrl: string;
 }) {
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof NewListFormSchema>>({
@@ -55,16 +57,12 @@ export default function NewListForm({
   function onSubmit(data: z.infer<typeof NewListFormSchema>) {
     startTransition(async () => {
       const userId = await getIdCookies();
-      const listId = await setNewList(
-        data.title,
-        "https://picsum.photos/seed/picsum/200/300",
-        userId!
-      );
+      const listId = await setNewList(data.title, imageUrl, userId!);
       setLists([
         ...lists,
         {
           title: data.title,
-          thumbnail: "https://picsum.photos/seed/picsum/200/300",
+          thumbnail: imageUrl,
           id: listId!,
         },
       ]);

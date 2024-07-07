@@ -11,16 +11,21 @@ import ShoppingListOptionsCard from "./ShoppingListOptionsCard";
 
 export default function AddNewList({
   username,
-  productId,
+  product,
 }: {
   username: string;
-  productId: string;
+  product: {
+    name: string;
+    price: string;
+    imageUrl: string;
+    id: string;
+  };
 }) {
   const [isPending, startTransition] = useTransition();
   const [title, setTitle] = useState("");
   const onClick = () => {
     startTransition(async () => {
-      await setNewList(title, "https://picsum.photos/200/300", username);
+      await setNewList(title, product.imageUrl, username);
     });
   };
   const [lists, setLists] = useState<
@@ -48,12 +53,16 @@ export default function AddNewList({
         </DialogTrigger>
         <DialogContent>
           <div className="">
-            <NewListForm setLists={setLists} lists={lists} />
+            <NewListForm
+              setLists={setLists}
+              lists={lists}
+              imageUrl={product.imageUrl}
+            />
           </div>
         </DialogContent>
       </Dialog>
       {lists.map((list, idx) => (
-        <ShoppingListOptionsCard list={list} productId={productId} key={idx} />
+        <ShoppingListOptionsCard list={list} productId={product.id} key={idx} />
       ))}
     </>
   );
