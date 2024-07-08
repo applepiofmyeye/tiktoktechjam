@@ -15,8 +15,8 @@ export default function EditPostSection() {
           />
           <div className="w-[20%] h-auto">
             <Image
-              src="https://m.media-amazon.com/images/I/61cVINNFA5L._AC_UF1000,1000_QL80_.jpg"
-              alt="bracelet placeholder"
+              src="https://picsum.photos/200/300"
+              alt="placeholder image"
               className="rounded-lg object-cover size-24"
               width={50}
               height={50}

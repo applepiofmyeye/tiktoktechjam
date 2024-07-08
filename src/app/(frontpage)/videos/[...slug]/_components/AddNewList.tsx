@@ -10,10 +10,14 @@ import NewListForm from "./NewListForm";
 import ShoppingListOptionsCard from "./ShoppingListOptionsCard";
 
 export default function AddNewList({
-  username,
+  video,
   product,
 }: {
-  username: string;
+  video: {
+    id: string;
+    description: string;
+    imageUrl: string;
+  };
   product: {
     name: string;
     price: string;
@@ -49,14 +53,16 @@ export default function AddNewList({
             <NewListForm
               setLists={setLists}
               lists={lists}
-              imageUrl={product.imageUrl}
+              imageUrl={video.imageUrl}
             />
           </div>
         </DialogContent>
       </Dialog>
+      {/* <div className="grid grid-cols-2 gap-2"> */}
       {lists.map((list, idx) => (
         <ShoppingListOptionsCard list={list} productId={product.id} key={idx} />
       ))}
+      {/* </div> */}
     </>
   );
 }

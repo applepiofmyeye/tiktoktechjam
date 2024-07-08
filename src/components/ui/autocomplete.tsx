@@ -12,7 +12,14 @@ import { Skeleton } from "./skeleton";
 import { Check } from "lucide-react";
 import { cn } from "../../lib/utils";
 
-export type Option = Record<"value" | "label", string> & Record<string, string>;
+export type Option = {
+  value: {
+    id: string;
+    imageUrl: string;
+    price: string;
+  };
+  label: string;
+};
 
 type AutoCompleteProps = {
   options: Option[];
@@ -125,7 +132,7 @@ export const AutoComplete = ({
                   const isSelected = selected?.value === option.value;
                   return (
                     <CommandItem
-                      key={option.value}
+                      key={option.value.id}
                       value={option.label}
                       onMouseDown={(event) => {
                         event.preventDefault();

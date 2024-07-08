@@ -10,21 +10,28 @@ import {
   Share2,
   ShoppingBag,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import ProductInfoSheet from "./ProductInfoSheet";
 import ShoppingListOptionsCard from "./ShoppingListOptionsCard";
 import AddNewList from "./AddNewList";
-
+export type Product = {
+  name: string;
+  price: string;
+  imageUrl: string;
+  id: string;
+};
 export default function ActivityPanel({
-  product,
+  products,
+  video,
   lists,
   username,
 }: {
-  product: {
-    name: string;
-    price: string;
-    imageUrl: string;
+  products: Product[] | undefined;
+
+  video: {
     id: string;
+    description: string;
+    imageUrl: string;
   };
   lists:
     | {
@@ -39,7 +46,14 @@ export default function ActivityPanel({
 }) {
   const [step, setStep] = useState(1);
   const [open, setIsOpen] = useState(false);
-  const onClickStep1 = () => setStep(2);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const onClickStep1 = (product: Product) => {
+    startTransition(() => {
+      setStep(2);
+      setSelectedProduct(product);
+    });
+  };
 
   return (
     <div className="absolute right-2 text-white">
@@ -68,21 +82,30 @@ export default function ActivityPanel({
           </SheetTrigger>
           <SheetContent side="bottom" className="w-[46vh]">
             {step == 1 ? (
-              <ProductInfoSheet product={product} onClick={onClickStep1} />
+              <div>
+                {products?.map((product, idx) => (
+                  <ProductInfoSheet
+                    key={idx}
+                    product={product}
+                    onClick={() => onClickStep1(product)}
+                  />
+                ))}
+              </div>
             ) : (
               <div className="space-y-4">
                 <Typography variant={"body-lg"} weight={"semibold"}>
                   Add to shopping list
                 </Typography>
                 <div className="grid grid-cols-2 justify-center gap-4">
-                  {username && (
-                    <AddNewList username={username} product={product} />
+                  {username && selectedProduct && (
+                    <AddNewList video={video} product={selectedProduct} />
                   )}
                   {lists &&
+                    selectedProduct &&
                     lists.map((list, idx) => (
                       <ShoppingListOptionsCard
                         key={idx}
-                        productId={product.id}
+                        productId={selectedProduct.id}
                         list={list}
                       />
                     ))}

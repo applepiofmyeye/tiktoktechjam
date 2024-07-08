@@ -1,5 +1,5 @@
 {
-  "id": "c03fc081-00b3-4d40-9893-7e4a1da9be81",
+  "id": "03faf64a-85e2-4620-9df0-c5606c2084b5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -37,6 +37,63 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.products_to_videos": {
+      "name": "products_to_videos",
+      "schema": "",
+      "columns": {
+        "product_id": {
+          "name": "product_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "video_id": {
+          "name": "video_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "products_to_videos_product_id_products_id_fk": {
+          "name": "products_to_videos_product_id_products_id_fk",
+          "tableFrom": "products_to_videos",
+          "tableTo": "products",
+          "columnsFrom": [
+            "product_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "products_to_videos_video_id_videos_id_fk": {
+          "name": "products_to_videos_video_id_videos_id_fk",
+          "tableFrom": "products_to_videos",
+          "tableTo": "videos",
+          "columnsFrom": [
+            "video_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "products_to_videos_product_id_video_id_pk": {
+          "name": "products_to_videos_product_id_video_id_pk",
+          "columns": [
+            "product_id",
+            "video_id"
+          ]
+        }
+      },
       "uniqueConstraints": {}
     },
     "public.shopping_lists": {
@@ -181,12 +238,18 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "video_src": {
-          "name": "video_src",
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image_url": {
+          "name": "image_url",
           "type": "text",
           "primaryKey": false,
           "notNull": true

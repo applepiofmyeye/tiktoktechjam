@@ -46,6 +46,21 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: "picsum.photos",
                 port:  '',
+            },
+            {
+                protocol: 'https',
+                hostname: "cdn.mos.cms.futurecdn.net",
+                port:  '',
+            },
+            {
+                protocol: 'https',
+                hostname: "www.trustedreviews.com",
+                port:  '',
+            },
+            {
+                protocol: 'https',
+                hostname: "robbreport.com",
+                port:  '',
             }
         ]
 

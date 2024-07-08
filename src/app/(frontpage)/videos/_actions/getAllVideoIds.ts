@@ -1,11 +1,11 @@
 import { db } from "@/db";
-import { products } from "@/db/schema";
+import { videos } from "@/db/schema";
 
 export async function getAllVideoIds () {
     try {
-        const allProducts = await db.select().from(products)
-        const allImageIds = allProducts.map(product => product.id)
-        return allImageIds
+        const allVideos = await db.select().from(videos)
+        const allVideoIds = allVideos.map(video => video.id)
+        return allVideoIds
 
     } catch (e) {
         if (e instanceof Error) {

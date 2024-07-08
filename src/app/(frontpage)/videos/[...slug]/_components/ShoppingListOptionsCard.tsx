@@ -46,7 +46,7 @@ export default function ShoppingListOptionsCard({
           className="shadow-sm rounded-lg size-40 object-cover border-2"
         />
       )}
-      <Typography className="text-gray-400" variant={"body-sm"}>
+      <Typography className="text-gray-400 text-ellipsis" variant={"body-sm"}>
         {list.title}
       </Typography>
     </div>

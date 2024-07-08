@@ -29,6 +29,19 @@ export const shoppingListsProducts = pgTable("list_to_products", {
     pk: primaryKey({ columns: [t.shoppingListId, t.productId] }),
 }));
 
+export const videos = pgTable("videos",  {
+    id: uuid("id").defaultRandom().primaryKey().notNull(),
+    description: text("description").notNull(),
+    imageUrl: text("image_url").notNull()
+})
+
+export const productsToVideos = pgTable("products_to_videos", {
+    productId: uuid("product_id").notNull().references(()=> products.id, {onDelete: "no action"}),
+    videoId: uuid("video_id").notNull().references(() => videos.id)
+}, (t) => ({
+    pk: primaryKey({columns: [t.productId, t.videoId]})
+}))
+
 export const usersRelations = relations(users, ({ many }) => ({
     shoppingLists: many(shoppingLists),
 }));
@@ -43,7 +56,12 @@ export const shoppingListsRelations = relations(shoppingLists, ({ one, many }) =
 
 export const productsRelations = relations(products, ({ many }) => ({
     shoppingLists: many(shoppingListsProducts),
+    videos: many(productsToVideos)
 }));
+
+export const videoRelations = relations(videos, ({many}) => ({
+    products: many(productsToVideos)
+}))
 
 export const shoppingListsProductsRelations = relations(shoppingListsProducts, ({ one }) => ({
     shoppingList: one(shoppingLists, {
@@ -52,6 +70,16 @@ export const shoppingListsProductsRelations = relations(shoppingListsProducts, (
     }),
     product: one(products, {
         fields: [shoppingListsProducts.productId],
+        references: [products.id],
+    }),
+}));
+export const videosToProductsRelations = relations(productsToVideos, ({ one }) => ({
+    video: one(videos, {
+        fields: [productsToVideos.videoId],
+        references: [videos.id],
+    }),
+    product: one(products, {
+        fields: [productsToVideos.productId],
         references: [products.id],
     }),
 }));

@@ -4,10 +4,12 @@ import { Typography } from "@/components/typography";
 import { AutoComplete, type Option } from "@/components/ui/autocomplete";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Link } from "lucide-react";
-import { useState } from "react";
+import { Link, Loader2, Trash } from "lucide-react";
+import { useState, useTransition } from "react";
 import ProductCard from "./ProductCard";
-import ProductListItem from "./ProductListItem";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import AddNewProduct from "./AddNewProduct";
 
 export default function AddProductSection({
   products,
@@ -21,11 +23,24 @@ export default function AddProductSection({
 }) {
   const [value, setValue] = useState<Option>();
   const PRODUCTS = products?.map((product) => ({
-    value: product.name.toLowerCase(),
+    value: product,
     label: product.name,
   }));
   const [open, setOpen] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState<Option[]>([]);
+  const [isPending, startTransition] = useTransition();
+  const onClick = (product: Option) => {
+    startTransition(() => {
+      console.log(JSON.stringify(selectedProducts));
+      const indexOfItem = selectedProducts.findIndex((x) => x == product);
+      console.log(indexOfItem);
+
+      selectedProducts.splice(indexOfItem, 1);
+
+      setSelectedProducts(selectedProducts);
+      console.log(JSON.stringify(selectedProducts));
+    });
+  };
 
   // hardcoded the search function because it is manageable but not necessary for this demo.
   return (
@@ -47,7 +62,7 @@ export default function AddProductSection({
             <div className="w-1" />
           </div>
         </SheetTrigger>
-        <SheetContent side={"bottom"} className="w-[46vh] h-[50vh]">
+        <SheetContent side={"bottom"} className="w-[46vh] h-[55vh]">
           {/* <Input type="search" placeholder="Search any product" /> */}
           <div className="">
             <AutoComplete
@@ -57,19 +72,48 @@ export default function AddProductSection({
               onValueChange={setValue}
               value={value}
             />
-            <div className="mt-6">
-              {value?.label == "Pixi Blush" ? (
-                <ProductCard setOpen={setOpen} setIsSelected={setIsSelected} />
-              ) : (
-                <Typography>
-                  No such product found. Try typing `Pixi Blush`
-                </Typography>
+            <div className="mt-6 grid grid-cols-2 gap-2">
+              {value?.label && (
+                <ProductCard
+                  setOpen={setOpen}
+                  selectedProducts={selectedProducts}
+                  setSelectedProducts={setSelectedProducts}
+                  product={value}
+                />
               )}
             </div>
+            <AddNewProduct />
           </div>
         </SheetContent>
       </Sheet>
-      {isSelected && <ProductListItem setIsSelected={setIsSelected} />}
+      {selectedProducts.map((product, idx) => (
+        <div key={idx} className="px-6 flex justify-between">
+          <div className="flex gap-x-3 items-start">
+            <Image
+              src={product.value.imageUrl}
+              alt="thumbnail list item"
+              width={20}
+              height={20}
+              className="rounded-md size-10 object-cover"
+            />
+            <div className="gap-y-2">
+              <Typography variant={"body-sm"} className="text-gray-400">
+                {product.label}
+              </Typography>
+              <Typography variant={"body-lg"} weight={"semibold"}>
+                S${product.value.price}
+              </Typography>
+            </div>
+          </div>
+          <Button variant={"link"} onClick={() => onClick(product)}>
+            {isPending ? (
+              <Loader2 className="size-4" />
+            ) : (
+              <Trash className="size-4" />
+            )}
+          </Button>
+        </div>
+      ))}
     </>
   );
 }

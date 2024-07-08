@@ -17,7 +17,7 @@ export default function ProductInfoSheet({
   onClick: () => void;
 }) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-2 mb-8">
       <Image
         src={product.imageUrl}
         alt="product thumbnail"
