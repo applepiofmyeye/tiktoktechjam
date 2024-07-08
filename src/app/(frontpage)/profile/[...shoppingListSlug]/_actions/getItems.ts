@@ -2,8 +2,8 @@ import { db } from "@/db"
 import { products, shoppingLists, shoppingListsProducts, users } from "@/db/schema"
 import { and, eq } from "drizzle-orm"
 
-export const getProducts = async (listTitle: string | undefined, userName: string) => {
-    if (listTitle == undefined) {
+export const getProducts = async (slug: string | undefined, userName: string) => {
+    if (slug == undefined) {
         return
     } 
     try {
@@ -16,7 +16,7 @@ export const getProducts = async (listTitle: string | undefined, userName: strin
         const shoppingList = await db
             .select()
             .from(shoppingLists)
-            .where(and(eq(shoppingLists.userId, user[0].id), eq(shoppingLists.title, listTitle)))
+            .where(and(eq(shoppingLists.userId, user[0].id), eq(shoppingLists.slug, slug)))
             console.log(shoppingList);
     
         const productShoppingList = await db
@@ -50,8 +50,8 @@ export const getProducts = async (listTitle: string | undefined, userName: strin
     }
 }
 
-export const getListName = async (slug: string) => {
-    const shoppingList = await db.select().from(shoppingLists).where(eq(shoppingLists.slug, slug))
+export const getListName = async (slug: string, id: string) => {
+    const shoppingList = await db.select().from(shoppingLists).where(and(eq(shoppingLists.slug, slug), eq(shoppingLists.userId, id)))
     if (shoppingList.length == 0) return
     const shoppingListName = shoppingList[0].title
     return shoppingListName

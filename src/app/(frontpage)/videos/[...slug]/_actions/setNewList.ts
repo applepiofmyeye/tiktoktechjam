@@ -2,6 +2,7 @@
 "use server"
 import { db } from "@/db";
 import { shoppingLists } from "@/db/schema";
+import { revalidatePath } from "next/cache";
 
 export async function setNewList (title: string, thumbnail: string, userId: string, slug:string) {
     try {
@@ -13,6 +14,7 @@ export async function setNewList (title: string, thumbnail: string, userId: stri
         }).returning({
             id: shoppingLists.id
         })
+        revalidatePath("/videos")
         return list[0].id
 
     } catch (e) {

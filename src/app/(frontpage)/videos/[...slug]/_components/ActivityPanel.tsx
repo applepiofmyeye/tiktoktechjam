@@ -14,6 +14,7 @@ import { useState, useTransition } from "react";
 import ProductInfoSheet from "./ProductInfoSheet";
 import ShoppingListOptionsCard from "./ShoppingListOptionsCard";
 import AddNewList from "./AddNewList";
+import { ScrollArea } from "@/components/ui/scroll-area";
 export type Product = {
   name: string;
   price: string;
@@ -80,45 +81,50 @@ export default function ActivityPanel({
               />
             </Button>
           </SheetTrigger>
-          <SheetContent side="bottom" className="w-[46vh]">
-            {step == 1 ? (
-              <div>
-                {products?.map((product, idx) => (
-                  <ProductInfoSheet
-                    key={idx}
-                    product={product}
-                    onClick={() => onClickStep1(product)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <Typography variant={"body-lg"} weight={"semibold"}>
-                  Add to shopping list
-                </Typography>
-                <div className="grid grid-cols-2 justify-center gap-4">
-                  {username && selectedProduct && (
-                    <AddNewList video={video} product={selectedProduct} />
-                  )}
-                  {lists &&
-                    selectedProduct &&
-                    lists.map((list, idx) => (
-                      <ShoppingListOptionsCard
-                        key={idx}
-                        productId={selectedProduct.id}
-                        list={list}
-                      />
-                    ))}
-                  {lists?.length == 0 && !username && (
-                    <Typography className="text-gray-600" variant={"body-sm"}>
-                      {
-                        "Please enter a username in the 'home' page before you continue."
-                      }{" "}
-                    </Typography>
-                  )}
+          <SheetContent
+            side="bottom"
+            className="w-[46vh] h-[56vh] overflow-y-auto"
+          >
+            <ScrollArea>
+              {step == 1 ? (
+                <div>
+                  {products?.map((product, idx) => (
+                    <ProductInfoSheet
+                      key={idx}
+                      product={product}
+                      onClick={() => onClickStep1(product)}
+                    />
+                  ))}
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="space-y-4">
+                  <Typography variant={"body-lg"} weight={"semibold"}>
+                    Add to shopping list
+                  </Typography>
+                  <div className="grid grid-cols-2 justify-center gap-4">
+                    {username && selectedProduct && (
+                      <AddNewList video={video} product={selectedProduct} />
+                    )}
+                    {lists &&
+                      selectedProduct &&
+                      lists.map((list, idx) => (
+                        <ShoppingListOptionsCard
+                          key={idx}
+                          productId={selectedProduct.id}
+                          list={list}
+                        />
+                      ))}
+                    {lists?.length == 0 && !username && (
+                      <Typography className="text-gray-600" variant={"body-sm"}>
+                        {
+                          "Please enter a username in the 'home' page before you continue."
+                        }{" "}
+                      </Typography>
+                    )}
+                  </div>
+                </div>
+              )}
+            </ScrollArea>
           </SheetContent>
         </Sheet>
         <Share2 fill="gray" className="size-8 stroke-2 " />

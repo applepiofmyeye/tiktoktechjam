@@ -5,7 +5,10 @@ import ProductCard from "./_components/ProductCard";
 import Masonry from "@mui/lab/Masonry";
 import { Button } from "@/components/ui/button";
 import ShoppingListBanner from "./_components/ShoppingListBanner";
-import { getUsernameCookies } from "../../home/_actions/getUsernameCookies";
+import {
+  getIdCookies,
+  getUsernameCookies,
+} from "../../home/_actions/getUsernameCookies";
 
 type ParamsProps = {
   params: {
@@ -15,9 +18,10 @@ type ParamsProps = {
 
 export default async function ShoppingListSlugPage({ params }: ParamsProps) {
   const slug = params.shoppingListSlug;
-  const title = await getListName(slug);
+  const id = await getIdCookies();
   const username = await getUsernameCookies();
-  const products = await getProducts(title, username!);
+  const products = await getProducts(slug, username!);
+  const title = await getListName(slug, id!);
   console.log(products);
 
   return (

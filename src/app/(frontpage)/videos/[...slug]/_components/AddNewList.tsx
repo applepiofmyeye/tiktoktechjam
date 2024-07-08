@@ -25,13 +25,13 @@ export default function AddNewList({
     id: string;
   };
 }) {
-  const [lists, setLists] = useState<
-    {
-      title: string;
-      thumbnail: string;
-      id: string;
-    }[]
-  >([]);
+  // const [lists, setLists] = useState<
+  //   {
+  //     title: string;
+  //     thumbnail: string;
+  //     id: string;
+  //   }[]
+  // >([]);
 
   return (
     <>
@@ -51,17 +51,17 @@ export default function AddNewList({
         <DialogContent>
           <div className="">
             <NewListForm
-              setLists={setLists}
-              lists={lists}
+              // setLists={setLists}
+              // lists={lists}
               imageUrl={video.imageUrl}
             />
           </div>
         </DialogContent>
       </Dialog>
       {/* <div className="grid grid-cols-2 gap-2"> */}
-      {lists.map((list, idx) => (
+      {/* {lists.map((list, idx) => (
         <ShoppingListOptionsCard list={list} productId={product.id} key={idx} />
-      ))}
+      ))} */}
       {/* </div> */}
     </>
   );

@@ -28,24 +28,24 @@ const NewListFormSchema = z.object({
 });
 
 export default function NewListForm({
-  setLists,
-  lists,
   imageUrl,
-}: {
-  setLists: React.Dispatch<
-    React.SetStateAction<
-      {
-        title: string;
-        thumbnail: string;
-        id: string;
-      }[]
-    >
-  >;
-  lists: {
-    title: string;
-    thumbnail: string;
-    id: string;
-  }[];
+}: // setLists?,
+// lists?,
+{
+  // setLists: React.Dispatch<
+  //   React.SetStateAction<
+  //     {
+  //       title: string;
+  //       thumbnail: string;
+  //       id: string;
+  //     }[]
+  //   >
+  // >;
+  // lists: {
+  //   title: string;
+  //   thumbnail: string;
+  //   id: string;
+  // }[];
   imageUrl: string;
 }) {
   const [isPending, startTransition] = useTransition();
@@ -64,14 +64,14 @@ export default function NewListForm({
         userId!,
         titleToSlug(data.title)
       );
-      setLists([
-        ...lists,
-        {
-          title: data.title,
-          thumbnail: imageUrl,
-          id: listId!,
-        },
-      ]);
+      // setLists([
+      //   ...lists,
+      //   {
+      //     title: data.title,
+      //     thumbnail: imageUrl,
+      //     id: listId!,
+      //   },
+      // ]);
       toast({
         title: `${data.title} has been added to your Shopping Lists!`,
       });
@@ -97,8 +97,12 @@ export default function NewListForm({
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-[80%]" disabled={isPending}>
-            Create {isPending && <Loader2 className="size-4" />}
+          <Button
+            type="submit"
+            className="w-[80%] space-y-2"
+            disabled={isPending}
+          >
+            Create {isPending && <Loader2 className="size-4 animate-spin" />}
           </Button>
         </form>
       </Form>

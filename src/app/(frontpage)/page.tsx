@@ -10,7 +10,7 @@ export default function Home() {
         <Typography variant={"display-sm"} weight={"semibold"}>
           welcome to my tiktok techjam project!
         </Typography>
-        <div className="flex flex-col gap-y-2">
+        <div className="flex flex-col gap-y-4">
           <Typography variant={"body-md"} weight={"semibold"}>
             how to navigate this website:
           </Typography>
@@ -18,7 +18,8 @@ export default function Home() {
             The left hand side of the screen has been designed to simulate a
             phone. <br /> You may use the buttons below to navigate around the
             website, and there are 3 demo flows in the README to follow if you
-            would like.
+            would like. <br />
+            First, please go to the tab `home` below to set a username.
           </Typography>
           <Link
             href="https://github.com/applepiofmyeye/tiktoktechjam#readme"
