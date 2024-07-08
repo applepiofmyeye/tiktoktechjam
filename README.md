@@ -11,7 +11,7 @@ Through Shopping Lists and custom Product Links, creators can link products (whe
 
 ## Getting Started
 
-Firs, open the website [here]()! (to be linked after deploymeny)
+First, open the website [here](https://tiktoktechjam.vercel.app)!
 
 The left hand side of the screen has been designed to simulate a phone. To get started, enter a username for yourself. This will be saved as your temporary account for this demo.
 You may use the buttons "home", "add", "profile" to navigate around the website, and there are 3 demo flows to follow as described below.
