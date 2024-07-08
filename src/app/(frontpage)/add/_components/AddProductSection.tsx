@@ -10,6 +10,7 @@ import ProductCard from "./ProductCard";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import AddNewProduct from "./AddNewProduct";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function AddProductSection({
   products,
@@ -62,9 +63,12 @@ export default function AddProductSection({
             <div className="w-1" />
           </div>
         </SheetTrigger>
-        <SheetContent side={"bottom"} className="w-[46vh] h-[55vh]">
+        <SheetContent
+          side={"bottom"}
+          className="w-[46vh] h-[55vh] overflow-y-auto"
+        >
           {/* <Input type="search" placeholder="Search any product" /> */}
-          <div className="">
+          <ScrollArea>
             <AutoComplete
               options={PRODUCTS}
               emptyMessage="No results."
@@ -83,7 +87,7 @@ export default function AddProductSection({
               )}
             </div>
             <AddNewProduct />
-          </div>
+          </ScrollArea>
         </SheetContent>
       </Sheet>
       {selectedProducts.map((product, idx) => (

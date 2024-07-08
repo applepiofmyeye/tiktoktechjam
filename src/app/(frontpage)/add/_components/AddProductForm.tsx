@@ -78,7 +78,7 @@ export default function AddProductForm() {
           />
           <Button
             type="submit"
-            className="w-[80%] space-x-2"
+            className="w-[80%] flex gap-2"
             disabled={isPending}
           >
             Create {isPending && <Loader2 className="size-4" />}
